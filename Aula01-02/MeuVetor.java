@@ -1,3 +1,4 @@
+import java.util.Random;
 // 22-2-24
 public class MeuVetor{
     // private -> conceito de encapsulamento (proteger os arquivos dentro do codigo) todos atributos precisam ser privados
@@ -83,5 +84,36 @@ public class MeuVetor{
             }
         }
         return s + "\n";
+    }
+
+   // aula 05/03/2024 
+    public void preencherVetor(){
+        Random r = new Random(); // guarda metodos para gerar um numero aleatorio
+        for(int i=0; i<v.length; i++){
+            add(r.nextInt(v.length*10)+1); // nextInt gera um numero inteiro aleatório
+        }
+    }
+
+    public void preencherVetor(int limite){
+        Random r = new Random();
+        for(int i=0; i<v.length; i++){
+            add(r.nextInt(limite)+1);
+        }
+    }
+
+    // METODO BUBBLESORT
+    public int bubbleSort(){
+        int cont = 0;
+        for(int i=1;i<v.length; i++){ // percorrer o vetor como um todo
+            for(int j=0; j<v.length-i;j++){ // para cada posição q chega no vetor percorre todas as interaçoes do vetor, comparando as posições
+                cont++;
+                if(v[j]> v[j+1]){ //troca dos elementos
+                    int aux = v[j]; // aux reservar o valor q estav anteriormente em j 
+                    v[j] = v[j+1];
+                    v[j+1] = aux;
+                }
+            }
+        }
+        return cont;
     }
 }
