@@ -116,4 +116,38 @@ public class MeuVetor{
         }
         return cont;
     }
+
+    // MÉTODO BUSCA SIMPLES 07/03/24
+    public Retorno buscaSimples(int valorPesquisado){
+        Retorno r = new Retorno();
+        r.incrementaContador();
+        // percorre o vetor
+        for(int i = 0; i < v.length; i++){
+            if(v[i] == valorPesquisado)
+                return r;
+        }
+        return r;
+    }
+
+    // METODO BUSCA BINARIA
+    public Retorno buscaBinaria(int valorPesquisado){
+        Retorno r = new Retorno();
+        int inicio = 0, fim = ultimaPos;
+
+        while(inicio <= fim){
+            int meio = (inicio + fim)/2;
+            r.incrementaContador();
+            
+            if(v[meio] == valorPesquisado){
+                r.setAchou(true);
+                return r;
+            }
+            if(valorPesquisado > v[meio]){
+                inicio = meio+1;
+            }else{ // valorPesquisado <= v[meio]
+                fim = meio-1;
+            }
+        }
+        return r;
+    }
 }
