@@ -120,10 +120,11 @@ public class MeuVetor{
     // MÉTODO BUSCA SIMPLES 07/03/24
     public Retorno buscaSimples(int valorPesquisado){
         Retorno r = new Retorno();
-        r.incrementaContador();
         // percorre o vetor
         for(int i = 0; i < v.length; i++){
+            r.incrementaContador();
             if(v[i] == valorPesquisado)
+                r.setAchou(true);
                 return r;
         }
         return r;
@@ -149,5 +150,40 @@ public class MeuVetor{
             }
         }
         return r;
+    }
+
+    // aula 12/03/24
+    public void adiciona(int elemento, int posicao){
+        if(estaCheio()) redimensiona(v.length*2);
+        if(posicao > ultimaPos) v[++ultimaPos] = elemento;
+        else{
+            int i;
+            // arrastar os elementos do vetor
+            for(i=ultimaPos+1; i>posicao; i--){ // i = i-1
+                System.out.println("i: " + i);
+                v[i] = v[i-1];
+                System.out.println("Elemento " + v[i] + " sai da posicao " + (i-1) + "e arrastado para posicao " + i);
+            }
+            v[i] = elemento; // v[posicao] = elemento
+            System.out.println("Novo elemento: " + elemento + " adicionado na posicao: " + i);
+            ultimaPos++;
+        }
+    }
+
+    public double remove(int pos){
+        if(pos < 0 || estaVazio() || pos > ultimaPos) return 0;
+
+        double aux = v[pos];
+
+        for(int i = pos; i < ultimaPos; i++){
+            System.out.println("i: " + i);
+            v[i] = v[i+1];
+            System.out.println("Elemento " + v[i] + " sai da posicao " + (i+1) + " arrastado para posicao " + i);
+        }
+        ultimaPos--;
+        if(v.length>=10 && ultimaPos <= v.length/4){
+            redimensiona(v.length/2);
+        }
+        return aux;
     }
 }
