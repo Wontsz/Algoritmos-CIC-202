@@ -18,6 +18,10 @@ public class Lista {
         return primeiro;
     }
 
+    public void setPrimeiro(No primeiro){
+        this.primeiro = primeiro();
+    }
+
     @Override
     public String toString() {
         String s = "lista";
@@ -33,4 +37,44 @@ public class Lista {
         }
         return s + "\n";
     }
+
+    public void insereFim(int i){
+        No novo = new No(i);
+
+        if(estaVazia()){
+            primeiro = novo;
+        }else{
+            No aux = primeiro;
+            while(aux.getProximo() != null){ // percorre ate a ultima pos
+                aux = aux.getProximo();
+            }
+            aux.setProximo(novo);
+        }
+    }
+
+    // remove elementos no inicio da lista
+    public int removeInicio(){
+        int temp = primeiro.getInfo();
+        primeiro = primeiro.getProximo(); // substituindo um elemento por outro
+        return temp;
+    }
+
+    // remove elemento no final da lista
+    public int removeFim(){
+        int temp;
+        if(primeiro.getProximo() == null){
+            temp = primeiro.getInfo();
+            primeiro = null;
+        }else{
+            No aux = primeiro;
+            // objetivo do while: atingir a penultima posicao da lista
+            while(aux.getProximo().getProximo() != null){ // chega na penultima posição
+                aux = aux.getProximo();
+            }
+            temp = aux.getProximo().getInfo();
+            aux.setProximo(null);
+        }
+        return temp;
+    }
 }
+
