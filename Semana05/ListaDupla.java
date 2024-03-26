@@ -9,11 +9,14 @@ public class ListaDupla{
 
     public void insereInicio(int i){
         NoDuplo novo = new NoDuplo(i);
+        // inserindo numero |5| -> 26/03/24
         if(estaVazia()){
-            // lista: |3|
+            // se lista estiver vazia o unico elemento dela vai ser o |5|
+            // lista: |3| \\
             ultimo = novo;
         }else{
-            // lista |3| |...| |5| |7|
+            // |5|.. |6| |8| |9| |0| -> 26/03/24
+            // lista |3| |...| |5| |7| \\
             novo.setProximo(primeiro);
             primeiro.setAnterior(novo);
         }
@@ -45,6 +48,20 @@ public class ListaDupla{
             primeiro.setAnterior(null);
         }
         return aux;
+    }
+
+    // 26/03/24
+    public int removeFim(){
+        int temp = ultimo.getInfo();
+        // |4| |2| |8|
+        ultimo = ultimo.getAnterior();
+        // |4| |2|, nó sobrepoe o nó |8|
+        if(ultimo == null){
+            primeiro = null;
+        }else{
+            ultimo.setProximo(null);
+        }
+        return temp;
     }
 
     @Override
