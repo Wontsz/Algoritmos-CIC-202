@@ -1,25 +1,22 @@
 // Fila circular
-public class Fila{
+public class FilaGenerica <E>{
     private int primeiro;
     private int ultimo;
     private int quantidade;
-    Object[] elementos;
+    private E[] elementos; // vetor de elementos do tipo de dado generico
 
     public static final int CAP_MIN = 10;
 
-    public Fila(){
-        elementos = new Object[CAP_MIN];
+    public FilaGenerica(){
+        //elementos = new Object[CAP_MIN];
+        elementos = capacidade > 10 ? (E[]) new Object[capacidade] : (E[] new Object[CAP_MIN]);
         primeiro = 0;
         ultimo = elementos.length - 1;
         quantidade = 0;
     }
 
-    public Fila(int capacidade){
-        elementos = new Object[elementos]
-
-        primeiro = 0;
-        ultimo= elementos.length -1;
-        quantidade = 0;
+    public FilaGenerica(int capacidade){
+        this(CAP_MIN);
     }
 
     public boolean estaVazia(){
@@ -34,12 +31,12 @@ public class Fila{
         return (posicao+1) % elementos.length
     }
 
-    public boolean enfileira(Object o){
+    public E enfileira(){
         if(estaCheia()) return false;
-        ultimo = proxima(ultimo);
-        elementos[ultimo] = o;
-        quantidade++;
-        return true;
+        E temp = elementos[primeiro];
+        primeiro = proxima(primeiro);
+        quantidade--;
+        return temp;
     }
 
     public Object desenfileira(){
@@ -54,15 +51,11 @@ public class Fila{
     public String toString(){
         if(estaVazia()) return "fila vazia!";
         String s = "";
-        if(primeiro <= ultimo){
-            for(int i = primeiro; i<=ultimo; i++) s += elementos[i] + " ";
-        }else{ // ultimo < primeiro = fila circular
-            int i = primeiro;
-            do{
-                s += elementos[i] + " ";
-                i = proxima(i);
-            }while(i != ultimo);
-        }
+        int i = primeiro;
+        do{
+            s += elementos[i] + "\n";
+            i - proxima(i);
+        }while(i != proxima(ultimo));
         return s;
     }
 }
